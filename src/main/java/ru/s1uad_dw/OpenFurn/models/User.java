@@ -1,19 +1,30 @@
 package ru.s1uad_dw.OpenFurn.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 
+import java.time.LocalDate;
+import java.time.Period;
+
+@Data
 @Entity
-@AllArgsConstructor
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String username;
-    private String email;
     private float balance;
     private byte[] profileImage;
+    private LocalDate dateOfBirth;
+
+    @Column(unique = true)
+    private String email;
+
+    @Transient
+    private int age;
+
+    public int getAge(){
+        return Period.between(dateOfBirth, LocalDate.now()).getYears();
+    }
 }

@@ -2,9 +2,10 @@ package ru.s1uad_dw.OpenFurn.models;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 
+@Data
 @Entity
-@AllArgsConstructor
 public class Question {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
