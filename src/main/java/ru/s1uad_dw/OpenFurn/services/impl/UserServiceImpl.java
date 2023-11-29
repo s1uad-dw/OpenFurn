@@ -1,21 +1,20 @@
 package ru.s1uad_dw.OpenFurn.services.impl;
 
-import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 import ru.s1uad_dw.OpenFurn.models.User;
+import ru.s1uad_dw.OpenFurn.repositories.UserRepository;
 import ru.s1uad_dw.OpenFurn.services.UserService;
-import ru.s1uad_dw.OpenFurn.repositories.*;
 
 import java.util.List;
 
 @Service
 @AllArgsConstructor
-@Primary
 public class UserServiceImpl implements UserService {
     private final UserRepository repository;
+
     @Override
     public User saveUser(User user) {
         return repository.save(user);
@@ -38,5 +37,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public void deleteById(@RequestBody Long id) {repository.deleteById(id);}
+    public void deleteById(Long id) {
+        repository.deleteById(id);
+    }
 }

@@ -13,7 +13,7 @@ import java.util.List;
 public class UserController {
     private final UserService service;
 //CREATE
-    @PostMapping("save_user")
+    @PostMapping
     public User saveUser(@RequestBody User user){return service.saveUser(user);}
 //READ
     @GetMapping
@@ -23,9 +23,9 @@ public class UserController {
     @GetMapping("{id}")
     public User findById(@PathVariable Long id){return service.findById(id);}
 //UPDATE
-    @PutMapping("update_user")
+    @PutMapping
     public User updateUser(@RequestBody User user){return service.updateUser(user);}
 //DELETE
-    @DeleteMapping("delete_user/{id}")
+    @DeleteMapping("{id}")
     public void deleteUById(@PathVariable Long id){service.deleteById(id);}
 }
