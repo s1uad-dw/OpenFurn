@@ -1,16 +1,37 @@
 package ru.s1uad_dw.OpenFurn.services;
 
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import ru.s1uad_dw.OpenFurn.models.Project;
-import ru.s1uad_dw.OpenFurn.models.User;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import ru.s1uad_dw.OpenFurn.dao.Project;
+import ru.s1uad_dw.OpenFurn.repositories.ProjectRepository;
 
 import java.util.List;
+import java.util.UUID;
 
-public interface ProjectService {
-    public Project saveProject(@RequestBody Project project);
-    public List<Project> findAllProjects();
-    public Project findById(@PathVariable Long id);
-    public Project updateProject(@RequestBody Project project);
-    public void deleteById(@RequestBody Long id);
+@Service
+@AllArgsConstructor
+public class ProjectService {
+    private final ProjectRepository repository;
+
+    public Project saveProject(Project project) {
+        return repository.save(project);
+    }
+
+    public List<Project> findAllProjects() {
+        return repository.findAll();
+    }
+
+    public Project findById(UUID id) {
+        return repository.findById(id).orElse(null);
+    }
+
+    public Project updateProject(Project project) {
+        return repository.save(project);
+    }
+
+    @Transactional
+    public void deleteById(UUID id) {
+        repository.deleteById(id);
+    }
 }
